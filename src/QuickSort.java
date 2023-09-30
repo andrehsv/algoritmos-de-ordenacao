@@ -1,31 +1,27 @@
 public class QuickSort {
-    public static void quickSort(int[] array, int begin, int end) {
-        if(begin < end) {
-            int partitionIndex = partition(array, begin, end);
-
-            quickSort(array, begin, partitionIndex - 1);
-            quickSort(array, partitionIndex + 1, end);
+    public static void quickSort(int[] A, int p, int r) {
+        if(p < r) {
+            int q = particione(A, p, r);
+            quickSort(A,p,q-1);
+            quickSort(A,q+1, r);
         }
     }
 
-    private static int partition(int[] array, int begin, int end) {
-        int pivot = array[end];
-        int i = (begin - 1);
-
-        for(int j = begin; j < end; j++) {
-            if(array[j] <= pivot) {
-                i++;
-
-                int swapTemp = array[i];
-                array[i] = array[j];
-                array[j] = swapTemp;
+    private static int particione(int[] A, int p, int r) {
+        int pivo = A[r];
+        int i = p-1;
+        for(int j = p;j < r-1; j++) {
+            if(A[j] <= pivo) {
+                i = i+1;
+                int temp1 = A[i];
+                A[i] = A[r];
+                A[r] = temp1;
             }
         }
-
-        int swapTemp = array[i + 1];
-        array[i+1] = array[end];
-        array[end] = swapTemp;
-
+        int temp2 = A[r];
+        A[r] = A[i+1];
+        A[i+1] = temp2;
         return i+1;
+
     }
 }
